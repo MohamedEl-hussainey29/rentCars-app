@@ -35,28 +35,25 @@ export default function TestimonialsSlider() {
   dots: false,
   infinite: true,
 
-  speed: 6000,
+  speed: 800,
   autoplay: true,
-  autoplaySpeed: 0,
-  cssEase: "linear",
+  autoplaySpeed: 3000,
 
   slidesToShow: 2,
   slidesToScroll: 1,
   arrows: false,
-  adaptiveHeight: true,
+  adaptiveHeight: false,
 
-  // ✅ control behavior
   draggable: true,
   swipe: true,
   swipeToSlide: true,
   touchMove: true,
-  pauseOnFocus: true,
 
   responsive: [
     {
       breakpoint: 768,
       settings: {
-        slidesToShow: 1,
+        slidesToShow: 1
       }
     }
   ]
@@ -67,21 +64,16 @@ export default function TestimonialsSlider() {
   <Slider {...settings}>
     {testimonials.map((item, index) => (
       <div key={index} className="mb-5">
-        {/* Changed height to minHeight so it can expand on mobile */}
         <div className="card mx-3 h-100">
           <div className="row g-0">
-            
-            {/* Image: Full width on mobile, half on desktop */}
             <div className="col-12 col-md-6">
               <img 
                 src={item.image} 
                 className="w-100 object-fit-cover" 
-                style={{ maxHeight: "350px"}} // Optional: limit image height on mobile
+                style={{ maxHeight: "350px"}}
                 alt="testimonial"
               />
             </div>
-
-            {/* Content: Full width on mobile, half on desktop */}
             <div className="col-12 col-md-6 d-flex align-items-center">
               <div className="card-body">
                 <h1 className="mb-0">5.5 <small className="h5">stars</small></h1>
