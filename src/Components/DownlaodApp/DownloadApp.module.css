@@ -1,0 +1,16 @@
+.bg{
+    background-image: url('../../assets/imges/landing-page/sec-5/Vector.png');
+    background-repeat: no-repeat;
+    background-origin: border-box;
+    background-size: 400px 500px;
+    margin-top: 0px;
+    height: auto !important;
+    background-position: left center;
+}
+
+.input{
+    width: 20px !important;
+    padding: 0.7rem 1.5rem !important;
+    border-radius: 80px !important;
+    background: rgb(206, 220, 255) !important;
+}

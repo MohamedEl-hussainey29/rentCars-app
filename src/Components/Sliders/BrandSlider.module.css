@@ -1,0 +1,8 @@
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+}
+
+.slick-slide img {
+  max-height: 80px;
+}

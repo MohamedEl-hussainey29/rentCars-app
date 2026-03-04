@@ -1,0 +1,5 @@
+.bg{
+    height: 100vh !important;
+    background-origin: border-box;
+    background-color: rgb(248, 251, 255);
+}
