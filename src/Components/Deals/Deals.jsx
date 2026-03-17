@@ -1,39 +1,19 @@
-import React, { useEffect, useState } from 'react'
 import deals from './Deals.module.css'
-import axios from 'axios'
 import { images } from '../../assets/images'
 import { Link } from 'react-router-dom'
 import Car from '../Car/Car'
+import useFetch from '../../hooks/useFetch'
+import useCarTransform  from '../../hooks/useCarTransform'
+import { useState } from 'react'
+
+const API = "https://myfakeapi.com/api/cars/";
 
 export default function Deals() {
 
   const [search, setSearch] = useState("")
-  const [cars , setCars] = useState([])
-  const carImages = [images.car1 , images.car2 , images.car3]
 
-
-  let getCars = async () => {
-    try {
-      let response = await axios.get("https://myfakeapi.com/api/cars/");
-      const rawCars = response.data.cars;
-
-      const carsWithImages = rawCars.map((car) => ({
-        ...car,
-        assignedImage: carImages[Math.floor(Math.random() * carImages.length)]
-      }));
-      
-      setCars(carsWithImages);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-
-  useEffect(()=>{
-    //mounting phase
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    getCars()
-  },[])
+  const transformedCars = useCarTransform(images)
+  const {data: cars , loading , error} = useFetch(API , transformedCars)
 
   return (
     <>
@@ -58,10 +38,20 @@ export default function Deals() {
           <h2 className={`text-capitalize my-3 ${deals.popularTitle}`}>most popular cars rental deals</h2>
         </div>
       </div>
-      <div className="row">
-        {cars.slice(0,4).map((car)=>(
-            <Car carInfo={car}/>
-        ))}
+      <div className="row" style={{ minHeight: "200px" }}>
+        {loading ? (
+          <div className="d-flex justify-content-center align-items-center w-100">
+            <div className="spinner-grow text-primary" role="status"></div>
+          </div>
+        ) : error ? (
+          <div className="text-center w-100">
+            <p>{error}</p>
+          </div>
+        ) : (
+          cars.slice(0, 4).map((car) => (
+            <Car key={car.id} carInfo={car} />
+          ))
+        )}
       </div>
       <div className="row my-5">
         <div className="col-12">
